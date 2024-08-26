@@ -2,6 +2,8 @@ import { Route,Routes } from "react-router-dom";
 import MainLayout from "../../Pages/Layout";
 import { lazy, Suspense } from "react";
 import { Facebook } from 'react-content-loader'
+import CustomErrorBoundary from "../ErrorBoundary/errorBoundary";
+
 
 
 
@@ -11,25 +13,26 @@ const CoinDetailsPage = lazy(()=> import('./../../Pages/CoinsDetailPage'));
 
 function Routing(){
     return(
-        <Routes>
-            <Route path="/" element={<MainLayout/>}>
+        <CustomErrorBoundary>
 
-                <Route index element={
-                    <Suspense fallback={<Facebook/>}>
-                        <Home/>
-                    </Suspense>
-                    
-                    
-                }/>
-                <Route path="/details/:coinId" element={
+            <Routes>
+                <Route path="/" element={<MainLayout/>}>
 
-                    <Suspense fallback={<Facebook/>}>
-                        <CoinDetailsPage/>
-                    </Suspense>
-                }/>
-                
-            </Route>
-        </Routes>
+                    <Route index element={
+                        <Suspense fallback={<Facebook/>}>
+                            <Home/>
+                        </Suspense>                                             
+                    }/>
+                    <Route path="/details/:coinId" element={
+                        <Suspense fallback={<Facebook/>}>
+                            <CoinDetailsPage/>
+                        </Suspense>
+                    }/>  
+                                    
+                </Route>
+            </Routes>
+
+        </CustomErrorBoundary>
     )
 
 }
