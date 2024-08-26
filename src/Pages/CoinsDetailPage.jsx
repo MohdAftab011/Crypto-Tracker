@@ -21,7 +21,7 @@ function CoinDetailsPage(){
     },[coin]);
 
     if(isLoading){
-        return <div>Loading...</div>
+        return <div>Downloading Coin Details...</div>
     }
 
     if(isError){
